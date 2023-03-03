@@ -1,0 +1,20 @@
+FROM python:3.11
+
+WORKDIR /app
+COPY templates ./templates
+COPY static/01.jpg static/02.jpg static/03.jpeg static/funcs.py static/logo.png ./static/
+COPY *.json ./static/
+COPY app.py .
+
+RUN pip install flask  
+RUN pip install google-cloud-storage
+
+
+USER root
+EXPOSE 5000
+
+ENV GOOGLE_APPLICATION_CREDENTIALS="/app/static/psychic-mason-374614-ef84d96f27ae.json"
+ENV BUCKET_NAME="videos_streaming"
+ENV SERIESCSV="Black_Lagoon,ChainsawMan,CowboyBebop"
+
+CMD ["bash", "-c", "ls -R && python /app/static/funcs.py & python app.py"]
