@@ -3,8 +3,7 @@ import os
 from google.cloud import storage
 
 
-def dirdownload(directory_name,bucket_name):
-
+def dirdownload(directory_name, bucket_name):
     # create a client instance
     client = storage.Client()
 
@@ -13,17 +12,18 @@ def dirdownload(directory_name,bucket_name):
     blobs = bucket.list_blobs(prefix=directory_name)
 
     # create a directory on the local machine to store the files
-    os.makedirs(directory_name, exist_ok=True)
+    os.makedirs(f"/app/static/{directory_name}", exist_ok=True)
 
     # download each file in the directory
     for blob in blobs:
         # construct the file path on the local machine
-        file_path = os.path.join(directory_name, blob.name.replace(directory_name, ""))
+        file_path = os.path.join("/app/static", blob.name)
 
         # download the file to the local machine
         blob.download_to_filename(file_path)
 
         print(f"File {blob.name} has been downloaded to {file_path}")
+
 
 
 
