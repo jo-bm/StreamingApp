@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Website</title>
+	<style>
+		body {
+			background-color: #111;
+			color: #fff;
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			margin: 0;
+			padding: 0;
+		}
+
+		header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between; /* Change justify-content value */
+			padding: 20px;
+			background-color: #222;
+		}
+
+		header img {
+			max-width: 100%;
+			height: auto;
+		}
+
+		nav ul {
+			display: flex; /* Add display property */
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		nav li {
+			margin-right: 20px; /* Add margin-right property */
+		}
+
+		nav li:last-child {
+			margin-right: 0; /* Remove margin-right property for last link */
+		}
+
+		nav a {
+			color: #fff;
+			text-decoration: none;
+			font-weight: bold;
+			transition: all 0.3s ease;
+		}
+
+		nav a:hover {
+			color: #ccc;
+		}
+
+		.container {
+			display: flex;
+			flex-wrap: wrap;
+			height: calc(100vh - 100px);
+		}
+
+		.container div {
+			flex-basis: 33.33%;
+			height: 100%;
+			position: relative;
+			overflow: hidden;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.container div:hover img {
+            filter: brightness(70%);
+            
+        }
+
+		.container div img {
+			width: 100%;
+			height: auto;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			transition: all 0.3s ease;
+			border: 4px solid #fff;
+			box-sizing: border-box;
+		}
+
+		.container div a {
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<img src="static/logo.png" alt="Logo">
+		<nav>
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+	<div class="container">
+		<div>
+			<a href="/file_list/Black_Lagoon">
+				<img src="static/01.jpg" alt="Image 1">
+			</a>
+		</div>
+		<div>
+			<a href="/file_list/ChainsawMan">
+				<img src="static/02.jpg" alt="Image 2">
+			</a>
+		</div>
+		<div>
+			<a href="/file_list/CowboyBebop">
+				<img src="static/03.jpeg" alt="Image 3">
+			</a>
+		</div>
+	</div>
+</body>
+</html>
