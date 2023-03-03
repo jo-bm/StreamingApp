@@ -19,7 +19,10 @@ def file_list(folder):
     global currentfolder
     currentfolder = folder
     folder_path = f'static/{folder}'
-    files = os.listdir(folder_path)
+    try:
+        files = os.listdir(folder_path)
+    except FileNotFoundError:   
+        return render_template('downloading.html')
 
     # Extract episode number from filenames using regex
     episode_dict = {}
