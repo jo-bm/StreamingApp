@@ -1,4 +1,8 @@
 
+# export GOOGLE_APPLICATION_CREDENTIALS="/media/jack/Second/proj/app/psychic-mason-374614-ef84d96f27ae.json"
+# export BUCKET_NAME="videos_streaming"
+# export SERIESCSV="Black_Lagoon,ChainsawMan,CowboyBebop"
+
 import os
 from google.cloud import storage
 
