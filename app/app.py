@@ -23,6 +23,7 @@ def video():
     return render_template('video.html')
 
 
+
 @app.route('/file_list/<folder>')
 def file_list(folder):
     global currentfolder
@@ -33,16 +34,18 @@ def file_list(folder):
     except FileNotFoundError:   
         return render_template('downloading.html')
 
-    # Extract episode number from filenames using regex
+    # Extract episode number from filenames using regex and store in a dictionary
     episode_dict = {}
     for file in files:
         match = re.search(r'S\d+E(\d+)', file)
         if match:
             episode_num = match.group(1)
-            episode_dict[episode_num] = file
-    
-    return render_template('episodes.html', folder_path=folder_path, episodes=episode_dict, seriesname=currentfolder)
+            episode_dict[int(episode_num)] = file
 
+    # Sort the episode dictionary by episode number
+    episode_dict = dict(sorted(episode_dict.items()))
+
+    return render_template('episodes.html', folder_path=folder_path, episodes=episode_dict, seriesname=currentfolder)
 
 
 @app.route('/play/<filename>')
