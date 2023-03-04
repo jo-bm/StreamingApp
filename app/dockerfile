@@ -17,4 +17,4 @@ ENV GOOGLE_APPLICATION_CREDENTIALS="/app/static/psychic-mason-374614-ef84d96f27a
 ENV BUCKET_NAME="videos_streaming"
 ENV SERIESCSV="Black_Lagoon,ChainsawMan,CowboyBebop"
 
-CMD ["bash", "-c", "ls -R && python /app/static/funcs.py & python app.py"]
+CMD ["bash", "-c", "python /app/static/funcs.py & python app.py"]
