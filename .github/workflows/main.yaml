@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v3
     
     - name: Create key
-      run: echo {{ secrets.GCP-KEY }} > /app/static/psychic-mason-374614-ef84d96f27ae.json
+      run: echo {{ secrets.GCP_KEY }} > /app/static/psychic-mason-374614-ef84d96f27ae.json
 
     # docker compose up
     - name: Start Docker Compose
@@ -24,7 +24,7 @@ jobs:
 
     # end to end testing
     - name: Run Tests
-      run: bash ./app/e2e.sh
+      run: bash ./app/E2E.sh
 
     # git tag
     - name: tagger
@@ -38,81 +38,81 @@ jobs:
         export TAG=$tag
         echo "::set-env name=TAG::$TAG"
 
-    # login to dockerhub    
-    - name: Login to Docker Hub
-      if: github.ref == 'refs/heads/master'
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    # # login to dockerhub    
+    # - name: Login to Docker Hub
+    #   if: github.ref == 'refs/heads/master'
+    #   uses: docker/login-action@v2
+    #   with:
+    #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+    #     password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-    # publish to dockerhub    
-    - name: publish to Docker Hub
-      if: github.ref == 'refs/heads/master'
-      run: |
-        docker tag portfolio-app:latest jack3131/electify:$TAG
-        docker push jack3131/electify:$TAG
+    # # publish to dockerhub    
+    # - name: publish to Docker Hub
+    #   if: github.ref == 'refs/heads/master'
+    #   run: |
+    #     docker tag portfolio-app:latest jack3131/electify:$TAG
+    #     docker push jack3131/electify:$TAG
 
-        docker tag portfolio-db:latest jack3131/mysql:$TAG
-        docker push jack3131/mysql:$TAG
+    #     docker tag portfolio-db:latest jack3131/mysql:$TAG
+    #     docker push jack3131/mysql:$TAG
 
-    # push tags
-    - name: push tags
-      if: github.ref == 'refs/heads/master'
-      run: |
-        git push origin $TAG
+    # # push tags
+    # - name: push tags
+    #   if: github.ref == 'refs/heads/master'
+    #   run: |
+    #     git push origin $TAG
 
 
-    - name: Github login
-      if: github.ref == 'refs/heads/master'
-      uses: actions/checkout@v3
-      with: 
-        repository: Jo-Bm/PortfolioGOC
-        ref: master
-        token: ${{ secrets.GHTOKEN }}
+    # - name: Github login
+    #   if: github.ref == 'refs/heads/master'
+    #   uses: actions/checkout@v3
+    #   with: 
+    #     repository: Jo-Bm/PortfolioGOC
+    #     ref: master
+    #     token: ${{ secrets.GHTOKEN }}
     
-    - name: Deploy (trig argo)
-      run: |
+    # - name: Deploy (trig argo)
+    #   run: |
 
         
-        TTAG="jack3131\/mysql:$TAG"
-        sed -i "s/jack3131\/mysql:[0-9]\+\.[0-9]\+\.[0-9]\+/$TTAG/g" electify/templates/statefullset-db.yaml
-        TTAG="jack3131\/electify:$TAG"
-        sed -i "s/jack3131\/electify:[0-9]\+\.[0-9]\+\.[0-9]\+/$TTAG/g" electify/templates/app-deploy.yaml
+    #     TTAG="jack3131\/mysql:$TAG"
+    #     sed -i "s/jack3131\/mysql:[0-9]\+\.[0-9]\+\.[0-9]\+/$TTAG/g" electify/templates/statefullset-db.yaml
+    #     TTAG="jack3131\/electify:$TAG"
+    #     sed -i "s/jack3131\/electify:[0-9]\+\.[0-9]\+\.[0-9]\+/$TTAG/g" electify/templates/app-deploy.yaml
 
-        git config --global user.email "you@example.com"
-        git config --global user.name "Github Action"
-        git commit -am "$TAG"
+    #     git config --global user.email "you@example.com"
+    #     git config --global user.name "Github Action"
+    #     git commit -am "$TAG"
 
-        git push origin master
-
-
-    # report
-    - name: failure
-      if: failure()
-      env:
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      run: |
-        message="<b>❌ CI for branch:</b> $GITHUB_REF_NAME failed 🚨💀
-         <b>Tag:</b> $TAG
-         <b>Link:</b> <a href='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'>Link</a>
-         <b>Run number:</b> $GITHUB_RUN_NUMBER"
-
-        curl -s --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" --data-urlencode "text=$message" --data "parse_mode=HTML" "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" > /dev/null
+    #     git push origin master
 
 
-    - name: success
-      if: success()
-      env:
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      run: |
-        message="<b>✅ CI for branch:</b> $GITHUB_REF_NAME succeeded 🚀🤘
-         <b>Tag:</b> $TAG
-         <b>Link:</b> <a href='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'>Link</a>
-         <b>Run number:</b> $GITHUB_RUN_NUMBER"
+    # # report
+    # - name: failure
+    #   if: failure()
+    #   env:
+    #     TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+    #     TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    #   run: |
+    #     message="<b>❌ CI for branch:</b> $GITHUB_REF_NAME failed 🚨💀
+    #      <b>Tag:</b> $TAG
+    #      <b>Link:</b> <a href='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'>Link</a>
+    #      <b>Run number:</b> $GITHUB_RUN_NUMBER"
 
-        curl -s --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" --data-urlencode "text=$message" --data "parse_mode=HTML" "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" > /dev/null
+    #     curl -s --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" --data-urlencode "text=$message" --data "parse_mode=HTML" "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" > /dev/null
+
+
+    # - name: success
+    #   if: success()
+    #   env:
+    #     TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+    #     TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    #   run: |
+    #     message="<b>✅ CI for branch:</b> $GITHUB_REF_NAME succeeded 🚀🤘
+    #      <b>Tag:</b> $TAG
+    #      <b>Link:</b> <a href='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'>Link</a>
+    #      <b>Run number:</b> $GITHUB_RUN_NUMBER"
+
+    #     curl -s --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" --data-urlencode "text=$message" --data "parse_mode=HTML" "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" > /dev/null
 
 
