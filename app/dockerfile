@@ -5,10 +5,9 @@ COPY templates ./templates
 COPY static/01.jpg static/02.jpg static/03.jpeg static/funcs.py static/logo.png ./static/
 COPY *.json ./static/
 COPY app.py .
+COPY requirements.txt .
 
-RUN pip install flask  
-RUN pip install google-cloud-storage
-
+RUN pip install -r requirements.txt
 
 USER root
 EXPOSE 5000

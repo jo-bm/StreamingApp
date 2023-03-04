@@ -1,7 +1,16 @@
 import os,re
 from flask import Flask, render_template, url_for, redirect, send_file
+from werkzeug.exceptions import HTTPException
+import logging,json_logging,sys
+
+# Configure logging
+logging.basicConfig(stream=sys.stdout, level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 app = Flask(__name__)
+
+json_logging.init_flask(enable_json=True)   
+json_logging.init_request_instrument(app)
+
 
 currentfolder = ''
 
@@ -41,6 +50,17 @@ def play(filename):
     global currentfolder
     video_path = f'static/{currentfolder}/{filename}'
     return send_file(video_path, mimetype='video/mp4')
+
+
+@app.errorhandler(Exception)
+def handle_exception(error):
+    # pass through HTTP errors
+    if isinstance(error, HTTPException):
+        return error
+    logging.critical("HTTP error has occurred in: %s", error)
+    # now you're handling non-HTTP exceptions only
+    return render_template("404.html", error=error)
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
