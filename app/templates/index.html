@@ -57,39 +57,40 @@
 			height: calc(100vh - 100px);
 		}
 
+
 		.container div {
-			flex-basis: 33.33%;
-			height: 100%;
-			position: relative;
-			overflow: hidden;
-			cursor: pointer;
-			transition: all 0.3s ease;
+		flex-basis: 33.33%;
+		height: 100%;
+		position: relative;
+		overflow: hidden;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		}
+
+		.container div img {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		transition: all 0.3s ease;
+		border: 4px solid #fff;
+		box-sizing: border-box;
+		object-fit: cover; /* Add this line */
 		}
 
 		.container div:hover img {
-            filter: brightness(70%);
-            
-        }
-
-		.container div img {
-			width: 100%;
-			height: auto;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			transition: all 0.3s ease;
-			border: 4px solid #fff;
-			box-sizing: border-box;
+		filter: brightness(70%);
 		}
 
 		.container div a {
-			display: block;
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
 		}
 	</style>
 </head>
@@ -118,6 +119,21 @@
 		<div>
 			<a href="/file_list/CowboyBebop">
 				<img src="static/03.jpeg" alt="Image 3">
+			</a>
+		</div>
+		<div>
+			<a href="/file_list/BakiHanma">
+				<img src="static/04.jpg" alt="Image 4">
+			</a>
+		</div>
+		<div>
+			<a href="/file_list/Dr.Stone">
+				<img src="static/05.jpg" alt="Image 5">
+			</a>
+		</div>
+		<div>
+			<a href="/file_list/AOT">
+				<img src="static/06.jpg" alt="Image 6">
 			</a>
 		</div>
 	</div>

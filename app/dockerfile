@@ -1,13 +1,16 @@
 FROM python:3.11
 
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
 WORKDIR /app
 COPY templates ./templates
-COPY static/01.jpg static/02.jpg static/03.jpeg static/funcs.py static/logo.png ./static/
+COPY static/01.jpg static/02.jpg static/03.jpeg static/04.jpg static/05.jpg static/06.jpg static/funcs.py static/logo.png ./static/
 COPY *.json ./static/
 COPY app.py .
-COPY requirements.txt .
 
-RUN pip install -r requirements.txt
+
+
 
 ENV PYTHONUNBUFFERED=1
 

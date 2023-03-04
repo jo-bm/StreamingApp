@@ -111,7 +111,73 @@
 		transform: scale(1.05);
 		transition: transform 0.3s ease-in-out, background-image 0.3s ease-in-out;
 	}
+	.file-item-bh {
+		background-color: #a7a7ad;
+		border-radius: 8px;
+		margin: 10px;
+		padding: 15px;
+		width: 600px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		cursor: pointer;
+		transition: background-color 0.3s ease-in-out;
+	}
 
+
+
+	.file-item-bh:hover {
+		background-image: url('https://www.icegif.com/wp-content/uploads/2022/08/icegif-1172.gif');
+		background-size: cover;
+		transform: scale(1.05);
+		transition: transform 0.3s ease-in-out, background-image 0.3s ease-in-out;
+	}
+
+	.file-item-ds {
+		background-color: #a7a7ad;
+		border-radius: 8px;
+		margin: 10px;
+		padding: 15px;
+		width: 600px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		cursor: pointer;
+		transition: background-color 0.3s ease-in-out;
+	}
+
+
+
+	.file-item-ds:hover {
+		background-image: url('https://j.gifs.com/E8G61l.gif');
+		background-size: cover;
+		transform: scale(1.05);
+		transition: transform 0.3s ease-in-out, background-image 0.3s ease-in-out;
+	}
+
+	.file-item-aot {
+		background-color: #a7a7ad;
+		border-radius: 8px;
+		margin: 10px;
+		padding: 15px;
+		width: 600px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		cursor: pointer;
+		transition: background-color 0.3s ease-in-out;
+	}
+
+
+
+	.file-item-aot:hover {
+		background-image: url('https://www.icegif.com/wp-content/uploads/2022/07/icegif-342.gif');
+		background-size: cover;
+		transform: scale(1.05);
+		transition: transform 0.3s ease-in-out, background-image 0.3s ease-in-out;
+	}
+
+	
 	
 	.file-name {
 		font-size: 20px;
@@ -225,6 +291,46 @@
 			</div>
 		</div>
 		{% endfor %}
+
+		{% elif seriesname == "BakiHanma" %}
+		<div class="search-bar">
+			<input type="text" id="search-input" class="search-input" placeholder="Search episodes...">
+			<button type="button" class="search-button" onclick="searchEpisodes()">Search</button>
+		</div>
+		{% for episode_num in episodes %}
+			<div class="file-item-bh episode" data-episode="{{ episode_num }}" onclick="window.location.href='{{ url_for('play', filename=episodes[episode_num]) }}';">
+				<div class="file-name">Episode {{ episode_num }}</div>
+				<div class="play-button">
+					<div class="play-icon"></div>
+				</div>
+			</div>
+			{% endfor %}
+		{% elif seriesname == "Dr.Stone" %}
+		<div class="search-bar">
+			<input type="text" id="search-input" class="search-input" placeholder="Search episodes...">
+			<button type="button" class="search-button" onclick="searchEpisodes()">Search</button>
+		</div>
+		{% for episode_num in episodes %}
+			<div class="file-item-ds episode" data-episode="{{ episode_num }}" onclick="window.location.href='{{ url_for('play', filename=episodes[episode_num]) }}';">
+				<div class="file-name">Episode {{ episode_num }}</div>
+				<div class="play-button">
+					<div class="play-icon"></div>
+				</div>
+			</div>
+			{% endfor %}
+			{% elif seriesname == "AOT" %}
+		<div class="search-bar">
+			<input type="text" id="search-input" class="search-input" placeholder="Search episodes...">
+			<button type="button" class="search-button" onclick="searchEpisodes()">Search</button>
+		</div>
+		{% for episode_num in episodes %}
+			<div class="file-item-aot episode" data-episode="{{ episode_num }}" onclick="window.location.href='{{ url_for('play', filename=episodes[episode_num]) }}';">
+				<div class="file-name">Episode {{ episode_num }}</div>
+				<div class="play-button">
+					<div class="play-icon"></div>
+				</div>
+			</div>
+			{% endfor %}
 	{% else %}
 	<div class="search-bar">
 		<input type="text" id="search-input" class="search-input" placeholder="Search episodes...">
