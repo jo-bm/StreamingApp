@@ -1,4 +1,16 @@
 #!/bin/bash
+
+while true; do
+    result=$(curl -s localhost/status)
+    if [[ $result == "all files downloaded" ]]; then
+        echo "All files downloaded!"
+        break
+    fi
+    sleep 1
+done
+
+
+
 set -e
 
 # Get list of series from main page

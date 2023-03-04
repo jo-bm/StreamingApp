@@ -54,6 +54,15 @@ def play(filename):
     video_path = f'static/{currentfolder}/{filename}'
     return send_file(video_path, mimetype='video/mp4')
 
+@app.route('/status')
+def status():
+    series_csv = os.getenv("SERIESCSV")
+    directory_names = series_csv.split(",")
+    print(directory_names)
+    for i in directory_names:
+        if not os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)), f"static/{i}")):
+            return "part of the files still downloading"
+    return "all files downloaded"
 
 @app.errorhandler(Exception)
 def handle_exception(error):
