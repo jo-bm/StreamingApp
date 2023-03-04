@@ -12,8 +12,4 @@ RUN pip install -r requirements.txt
 USER root
 EXPOSE 5000
 
-ENV GOOGLE_APPLICATION_CREDENTIALS="/app/static/psychic-mason-374614-ef84d96f27ae.json"
-ENV BUCKET_NAME="videos_streaming"
-ENV SERIESCSV="Black_Lagoon,ChainsawMan,CowboyBebop"
-
 CMD ["bash", "-c", "python /app/static/funcs.py & python app.py"]
