@@ -5,7 +5,7 @@ import logging,json_logging,sys
 from functions import list_files_in_folder
 
 from google.cloud import storage
-from google.oauth2.service_account import Credentials
+
 
 
 # Configure logging
@@ -60,16 +60,15 @@ def play(filename):
     #file_name = "Black_Lagoon/Black_Lagoon_S01E01.m4v"
     file_name = f'{currentfolder}/{filename}'
 
-    credentials = Credentials.from_service_account_file("/media/jack/Second/proj/psychic-mason-374614-ef84d96f27ae.json")
-    client = storage.Client(credentials=credentials)
+    client = storage.Client()
 
     bucket = client.get_bucket(BUCKET_NAME)
     blob = bucket.blob(file_name)
 
-
     headers = {"Range": "bytes=0-"}
 
     return Response(blob.download_as_bytes(), headers=headers, mimetype="video/mp4")
+
     
     
 
