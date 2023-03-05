@@ -7,7 +7,7 @@ WORKDIR /app
 COPY templates ./templates
 COPY  static/funcs.py ./static/
 COPY static/css ./static/css/
-COPY *.json ./static/
+COPY static/*.json ./static/
 COPY app.py .
 
 
@@ -16,4 +16,4 @@ ENV PYTHONUNBUFFERED=1
 USER root
 EXPOSE 5000
 
-CMD ["bash", "-c", "ls -R && python /app/static/funcs.py & python app.py"]
+CMD ["bash", "-c", "python /app/static/funcs.py & python app.py"]
