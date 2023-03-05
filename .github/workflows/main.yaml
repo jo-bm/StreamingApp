@@ -19,8 +19,8 @@ jobs:
       run: |
         ls
         echo 'ls 1'
-        echo ${{ secrets.GCP_KEY }} >> ./app/static/psychic-mason-374614-ef84d96f27ae.json
-        echo @@@@@@@ key created @@@@@@@
+        echo "${{ secrets.GCP_KEY }}" >> ./app/static/psychic-mason-374614-ef84d96f27ae.json
+        echo "@@@@@@@ key created @@@@@@@"
         ls app/static
         cat ./app/static/psychic-mason-374614-ef84d96f27ae.json
 
