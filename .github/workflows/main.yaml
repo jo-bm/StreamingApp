@@ -18,32 +18,32 @@ jobs:
     - name: Create key
       run: |
         ls
-        echo {{ secrets.GCP_KEY }} > ./app/static/psychic-mason-374614-ef84d96f27ae.json
+        echo ${{ secrets.GCP_KEY }} > ./app/static/psychic-mason-374614-ef84d96f27ae.json
         echo @@@@@@@ key created @@@@@@@
         ls app/static
         cat ./app/static/psychic-mason-374614-ef84d96f27ae.json
 
-    # # docker compose up
-    # - name: Start Docker Compose
-    #   run: docker compose up -d
+    # docker compose up
+    - name: Start Docker Compose
+      run: docker compose up -d
 
-    # # end to end testing
-    # - name: Run Tests
-    #   run: |
-    #     docker-compose logs app
-    #     bash ./app/E2E.sh
+    # end to end testing
+    - name: Run Tests
+      run: |
+        docker-compose logs app
+        bash ./app/E2E.sh
 
-    # # git tag
-    # - name: tagger
-    #   if: github.ref == 'refs/heads/master'
-    #   id: tagger
-    #   env:          
-    #     ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-    #   run: |
+    # git tag
+    - name: tagger
+      if: github.ref == 'refs/heads/master'
+      id: tagger
+      env:          
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      run: |
 
-    #     tag=$(bash ./app/tagger.sh)
-    #     export TAG=$tag
-    #     echo "::set-env name=TAG::$TAG"
+        tag=$(bash ./app/tagger.sh)
+        export TAG=$tag
+        echo "::set-env name=TAG::$TAG"
 
     # # login to dockerhub    
     # - name: Login to Docker Hub
