@@ -27,7 +27,11 @@ jobs:
     # end to end testing
     - name: Run Tests
       run: |
+        docker logs app
+        echo "@@@@@@@@@@@@@@@@"
         pip install pytest
+        echo "@@@@@@@@@@@@@@@@"
+
         pytest ./app/E2E.sh
 
     # git tag
