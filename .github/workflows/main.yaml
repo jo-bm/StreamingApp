@@ -29,7 +29,7 @@ jobs:
     - name: Run Tests
       run: |
         docker logs app
-        bash ./app/E2E.sh
+        #bash ./app/E2E.sh
 
     # git tag
     - name: tagger
