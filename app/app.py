@@ -1,7 +1,12 @@
 import os,re
-from flask import Flask, render_template, url_for, redirect, send_file
+from flask import Flask, render_template, url_for, redirect, send_file,Response
 from werkzeug.exceptions import HTTPException
 import logging,json_logging,sys
+from functions import list_files_in_folder
+
+from google.cloud import storage
+from google.oauth2.service_account import Credentials
+
 
 # Configure logging
 logging.basicConfig(stream=sys.stdout, level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
@@ -29,10 +34,8 @@ def file_list(folder):
     global currentfolder
     currentfolder = folder
     folder_path = f'static/{folder}'
-    try:
-        files = os.listdir(folder_path)
-    except FileNotFoundError:   
-        return render_template('downloading.html')
+    
+    files = list_files_in_folder(f"{folder}/")
 
     # Extract episode number from filenames using regex and store in a dictionary
     episode_dict = {}
@@ -51,20 +54,26 @@ def file_list(folder):
 @app.route('/play/<filename>')
 def play(filename):
     global currentfolder
-    video_path = f'static/{currentfolder}/{filename}'
-    return send_file(video_path, mimetype='video/mp4')
 
-@app.route('/status')
-def status():
-    series_csv = os.getenv("SERIESCSV")
-    directory_names = series_csv.split(",")
-    for i in directory_names:
-        if not os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)), f"static/{i}")):
-            filelist = "part of the files still downloading... current folder files: ",os.listdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), "static/"))
-            retval = f"{filelist}"
-            print(type(retval))
-            return retval
-    return "all files downloaded"
+    BUCKET_NAME = os.environ.get('BUCKET_NAME')
+
+    #file_name = "Black_Lagoon/Black_Lagoon_S01E01.m4v"
+    file_name = f'{currentfolder}/{filename}'
+
+    credentials = Credentials.from_service_account_file("/media/jack/Second/proj/psychic-mason-374614-ef84d96f27ae.json")
+    client = storage.Client(credentials=credentials)
+
+    bucket = client.get_bucket(BUCKET_NAME)
+    blob = bucket.blob(file_name)
+
+
+    headers = {"Range": "bytes=0-"}
+
+    return Response(blob.download_as_bytes(), headers=headers, mimetype="video/mp4")
+    
+    
+
+
 
 @app.errorhandler(Exception)
 def handle_exception(error):
