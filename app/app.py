@@ -23,11 +23,6 @@ currentfolder = ''
 def index():
     return render_template('index.html')
 
-@app.route('/video')
-def video():
-    return render_template('video.html')
-
-
 
 @app.route('/file_list/<folder>')
 def file_list(folder):
@@ -57,7 +52,6 @@ def play(filename):
 
     BUCKET_NAME = os.environ.get('BUCKET_NAME')
 
-    #file_name = "Black_Lagoon/Black_Lagoon_S01E01.m4v"
     file_name = f'{currentfolder}/{filename}'
 
     client = storage.Client()
@@ -68,9 +62,6 @@ def play(filename):
     headers = {"Range": "bytes=0-"}
 
     return Response(blob.download_as_bytes(), headers=headers, mimetype="video/mp4")
-
-    
-    
 
 
 
