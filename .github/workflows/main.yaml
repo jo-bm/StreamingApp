@@ -16,22 +16,19 @@ jobs:
       uses: actions/checkout@v3
     
     - name: Create key
-      run: |
-        ls
-        echo 'ls 1'
-        echo "${{ secrets.GCP_KEY }}" >> ./app/static/psychic-mason-374614-ef84d96f27ae.json
-        echo "@@@@@@@ key created @@@@@@@"
-        ls app/static
-        cat ./app/static/psychic-mason-374614-ef84d96f27ae.json
+      run: echo "${{ secrets.GCP_KEY }}" >> ./app/static/psychic-mason-374614-ef84d96f27ae.json
+
 
     # docker compose up
     - name: Start Docker Compose
-      run: docker compose up -d
+      run: |
+        ls -R
+        docker compose up -d
 
     # end to end testing
     - name: Run Tests
       run: |
-        docker-compose logs app
+        docker logs app
         bash ./app/E2E.sh
 
     # git tag
