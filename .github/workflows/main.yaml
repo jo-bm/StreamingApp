@@ -24,7 +24,9 @@ jobs:
 
     # end to end testing
     - name: Run Tests
-      run: bash ./app/E2E.sh
+      run: |
+        docker-compose logs app
+        bash ./app/E2E.sh
 
     # git tag
     - name: tagger
