@@ -11,89 +11,89 @@
 			margin: 0;
 			padding: 0;
 		}
-
 		header {
-			display: flex;
-			align-items: center;
-			justify-content: space-between; /* Change justify-content value */
-			padding: 20px;
-			background-color: #222;
-		}
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 20px;
+		background-color: #222;
+	}
 
-		header img {
-			max-width: 100%;
-			height: auto;
-		}
+	header img {
+		max-width: 100%;
+		height: auto;
+	}
 
-		nav ul {
-			display: flex; /* Add display property */
-			list-style: none;
-			margin: 0;
-			padding: 0;
-		}
+	nav ul {
+		display: flex;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
 
-		nav li {
-			margin-right: 20px; /* Add margin-right property */
-		}
+	nav li {
+		margin-right: 20px;
+	}
 
-		nav li:last-child {
-			margin-right: 0; /* Remove margin-right property for last link */
-		}
+	nav li:last-child {
+		margin-right: 0;
+	}
 
-		nav a {
-			color: #fff;
-			text-decoration: none;
-			font-weight: bold;
-			transition: all 0.3s ease;
-		}
+	nav a {
+		color: #fff;
+		text-decoration: none;
+		font-weight: bold;
+		transition: all 0.3s ease;
+	}
 
-		nav a:hover {
-			color: #ccc;
-		}
+	nav a:hover {
+		color: #ccc;
+	}
 
-		.container {
-			display: flex;
-			flex-wrap: wrap;
-			height: calc(100vh - 100px);
-		}
+	.container {
+		display: flex;
+		flex-wrap: wrap;
+		height: calc(100vh - 100px);
+		justify-content: center;
+		align-items: center;
+	}
 
 
-		.container div {
-		flex-basis: 33.33%;
-		height: 100%;
+	.container div {
+		flex-basis: calc(100%/3);
+		height: calc(100%/2);
 		position: relative;
 		overflow: hidden;
 		cursor: pointer;
 		transition: all 0.3s ease;
-		}
+	}
 
-		.container div img {
+	.container div img {
 		width: 100%;
 		height: 100%;
 		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+		top: 0;
+		left: 0;
 		transition: all 0.3s ease;
-		border: 4px solid #fff;
-		box-sizing: border-box;
-		object-fit: cover; /* Add this line */
+		object-fit: cover;
+		border: 4px solid black; /* Add this line */
+		box-sizing: border-box; /* Add this line to include the border in the size calculation */
 		}
 
-		.container div:hover img {
+
+	.container div:hover img {
 		filter: brightness(70%);
-		}
+	}
 
-		.container div a {
+	.container div a {
 		display: block;
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		}
-	</style>
-</head>
+	}
+</style>
 <body>
 	<header>
 		<img src="https://i.imgur.com/9wN2JZf.png" alt="Logo">
@@ -108,32 +108,32 @@
 	<div class="container">
 		<div>
 			<a href="/file_list/Black_Lagoon">
-				<img src="https://i.imgur.com/dbl2tNS.jpg" alt="Image 1">
+				<img src="https://www.theanimedaily.com/wp-content/uploads/2021/03/Black-Lagoon-Season-4-3.jpg" alt="Image 1">
 			</a>
 		</div>
 		<div>
 			<a href="/file_list/ChainsawMan">
-				<img src="https://i.imgur.com/yFq3aOD.jpg" alt="Image 2">
+				<img src="https://img1.ak.crunchyroll.com/i/spire4/f91275e6e5a3c15be90358c6ead433ca1659084308_main.png" alt="Image 2">
 			</a>
 		</div>
 		<div>
 			<a href="/file_list/CowboyBebop">
-				<img src="https://i.imgur.com/h7Updn2.jpg" alt="Image 3">
+				<img src="https://img.olhardigital.com.br/wp-content/uploads/2021/06/fun-FUN-CBY-JPN_S1-Full-Image_GalleryCover-en-US-1489784785929._UR19201080_RI_.jpg" alt="Image 3">
 			</a>
 		</div>
 		<div>
 			<a href="/file_list/BakiHanma">
-				<img src="https://i.imgur.com/yX8QsUG.jpg" alt="Image 4">
+				<img src="https://occ-0-2568-58.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABUbolrsi2liOMO4EWmHoWAIuzTpefasoKDVN0GSY4WxOoo9OCTGCd_y2ysAfKdaxmLaafS7Upvd0Y4Nw8Hd6I31jS51xbB06Jkxz6OR20J6FRkmja9sIj1WuCE5aLzF5rd0Lyw.jpg?r=be3" alt="Image 4">
 			</a>
 		</div>
 		<div>
 			<a href="/file_list/Dr.Stone">
-				<img src="https://i.imgur.com/rfiQdpo.jpg" alt="Image 5">
+				<img src="https://i.imgur.com/swNmOYl.jpg" alt="Image 5">
 			</a>
 		</div>
 		<div>
 			<a href="/file_list/AOT">
-				<img src="https://i.imgur.com/hb8SaBj.jpg" alt="Image 6">
+				<img src="https://www.thenewsfetcher.com/wp-content/uploads/2020/11/attack-on-titan-cover.jpg" alt="Image 6">
 			</a>
 		</div>
 	</div>
