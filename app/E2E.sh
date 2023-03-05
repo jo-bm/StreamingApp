@@ -6,6 +6,7 @@ while true; do
         echo "All files downloaded!"
         break
     fi
+    echo "$result"
     sleep 1
 done
 
