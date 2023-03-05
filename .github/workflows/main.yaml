@@ -23,7 +23,7 @@ jobs:
     - name: Start Docker Compose
       run: |
         ls -R
-        #docker compose up -d
+        docker compose up -d
 
     # end to end testing
     - name: Run Tests
