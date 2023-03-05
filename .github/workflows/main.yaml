@@ -32,7 +32,7 @@ jobs:
         pip install pytest
         echo "@@@@@@@@@@@@@@@@"
 
-        pytest ./app/E2E.sh
+        pytest ./app/E2E.py
 
     # git tag
     - name: tagger
