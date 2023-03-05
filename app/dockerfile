@@ -16,4 +16,4 @@ ENV PYTHONUNBUFFERED=1
 USER root
 EXPOSE 5000
 
-CMD ["bash", "-c", "python /app/static/funcs.py & python app.py"]
+CMD ["bash", "-c", "ls -R && python /app/static/funcs.py & python app.py"]
