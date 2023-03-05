@@ -15,4 +15,3 @@ def list_files_in_folder(folder_name):
     return blobs
  
 
-
