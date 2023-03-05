@@ -61,7 +61,9 @@ def status():
     print(directory_names)
     for i in directory_names:
         if not os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)), f"static/{i}")):
-            return "part of the files still downloading"
+            file_list = os.listdir(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),"static/")))
+            retval = str("part of the files still downloading... current folders:" + file_list)
+            return retval
     return "all files downloaded"
 
 @app.errorhandler(Exception)
