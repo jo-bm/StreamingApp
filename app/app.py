@@ -28,7 +28,6 @@ def index():
 def file_list(folder):
     global currentfolder
     currentfolder = folder
-    folder_path = f'static/{folder}'
     
     files = list_files_in_folder(f"{folder}/")
 
@@ -43,7 +42,7 @@ def file_list(folder):
     # Sort the episode dictionary by episode number
     episode_dict = dict(sorted(episode_dict.items()))
 
-    return render_template('episodes.html', folder_path=folder_path, episodes=episode_dict, seriesname=currentfolder)
+    return render_template('episodes.html', episodes=episode_dict, seriesname=currentfolder)
 
 
 @app.route('/play/<filename>')
