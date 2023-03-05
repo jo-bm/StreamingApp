@@ -58,11 +58,11 @@ def play(filename):
 def status():
     series_csv = os.getenv("SERIESCSV")
     directory_names = series_csv.split(",")
-    print(directory_names)
     for i in directory_names:
         if not os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)), f"static/{i}")):
-            file_list = os.listdir(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),"static/")))
-            retval = str("part of the files still downloading... current folders:" + file_list)
+            filelist = "part of the files still downloading... current folder files: ",os.listdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), "static/"))
+            retval = f"{filelist}"
+            print(type(retval))
             return retval
     return "all files downloaded"
 
