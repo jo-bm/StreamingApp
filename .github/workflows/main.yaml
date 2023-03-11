@@ -16,8 +16,7 @@ jobs:
       uses: actions/checkout@v3
     
     - name: Create key
-      run: echo "${{ secrets.GCP_KEY }}" >> ./app/psychic-mason-374614-ef84d96f27ae.json
-
+      run: cp /yek/*.json ./app/
 
     # docker compose up
     - name: Start Docker Compose
@@ -36,13 +35,12 @@ jobs:
     - name: tagger
       if: github.ref == 'refs/heads/master'
       id: tagger
-      env:          
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      # env:          
+      #   ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       run: |
-
         tag=$(bash ./app/tagger.sh)
-        export TAG=$tag
-        echo "::set-env name=TAG::$TAG"
+        # export TAG=$tag
+        # echo "::set-env name=TAG::$TAG"
 
     # # login to dockerhub    
     # - name: Login to Docker Hub
