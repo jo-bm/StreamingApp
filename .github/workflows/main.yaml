@@ -27,8 +27,6 @@ jobs:
     - name: Run Tests
       run: |
         pip install pytest
-        curl localhost
-        sleep 7 && docker logs app
         pytest ./app/E2E.py
 
     # git tag
