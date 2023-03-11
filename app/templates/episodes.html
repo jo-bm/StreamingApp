@@ -21,7 +21,7 @@
 		</div>
 
 		{% for episode_num in episodes %}
-		<div class="file-item-cs episode" data-episode="{{ episode_num }}" onclick="showLoadingPopup('{{ url_for('play', filename=episodes[episode_num]) }}')">
+		<div class="file-item-cs episode" data-episode="{{ episode_num }}" onclick="showLoadingPopup('{{ url_for('views.play', filename=episodes[episode_num]) }}')">
 			<div class="file-name">Episode {{ episode_num }}</div>
 			<div class="play-button">
 				<div class="play-icon"></div>
@@ -35,7 +35,7 @@
 		<button type="button" class="search-button" onclick="searchEpisodes()">Search</button>
 	</div>
 	{% for episode_num in episodes %}
-		<div class="file-item-bl episode" data-episode="{{ episode_num }}" onclick="showLoadingPopup('{{ url_for('play', filename=episodes[episode_num]) }}')">
+		<div class="file-item-bl episode" data-episode="{{ episode_num }}" onclick="showLoadingPopup('{{ url_for('views.play', filename=episodes[episode_num]) }}')">
 			<div class="file-name">Episode {{ episode_num }}</div>
 			<div class="play-button">
 				<div class="play-icon"></div>
@@ -49,7 +49,7 @@
 			<button type="button" class="search-button" onclick="searchEpisodes()">Search</button>
 		</div>
 		{% for episode_num in episodes %}
-			<div class="file-item-bh episode" data-episode="{{ episode_num }}" onclick="showLoadingPopup('{{ url_for('play', filename=episodes[episode_num]) }}')">
+			<div class="file-item-bh episode" data-episode="{{ episode_num }}" onclick="showLoadingPopup('{{ url_for('views.play', filename=episodes[episode_num]) }}')">
 				<div class="file-name">Episode {{ episode_num }}</div>
 				<div class="play-button">
 					<div class="play-icon"></div>
@@ -62,7 +62,7 @@
 			<button type="button" class="search-button" onclick="searchEpisodes()">Search</button>
 		</div>
 		{% for episode_num in episodes %}
-			<div class="file-item-ds episode" data-episode="{{ episode_num }}" onclick="showLoadingPopup('{{ url_for('play', filename=episodes[episode_num]) }}')">
+			<div class="file-item-ds episode" data-episode="{{ episode_num }}" onclick="showLoadingPopup('{{ url_for('views.play', filename=episodes[episode_num]) }}')">
 				<div class="file-name">Episode {{ episode_num }}</div>
 				<div class="play-button">
 					<div class="play-icon"></div>
@@ -75,7 +75,7 @@
 			<button type="button" class="search-button" onclick="searchEpisodes()">Search</button>
 		</div>
 		{% for episode_num in episodes %}
-			<div class="file-item-aot episode" data-episode="{{ episode_num }}" onclick="showLoadingPopup('{{ url_for('play', filename=episodes[episode_num]) }}')">
+			<div class="file-item-aot episode" data-episode="{{ episode_num }}" onclick="showLoadingPopup('{{ url_for('views.play', filename=episodes[episode_num]) }}')">
 				<div class="file-name">Episode {{ episode_num }}</div>
 				<div class="play-button">
 					<div class="play-icon"></div>
@@ -89,7 +89,7 @@
 	</div>
 
 	{% for episode_num in episodes %}
-		<div class="file-item-cb episode" data-episode="{{ episode_num }}" onclick="showLoadingPopup('{{ url_for('play', filename=episodes[episode_num]) }}')">
+		<div class="file-item-cb episode" data-episode="{{ episode_num }}" onclick="showLoadingPopup('{{ url_for('views.play', filename=episodes[episode_num]) }}')">
 			<div class="file-name">Episode {{ episode_num }}</div>
 			<div class="play-button">
 				<div class="play-icon"></div>
