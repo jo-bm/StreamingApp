@@ -1,8 +1,7 @@
-import os,re
+
 from flask import Flask, render_template, url_for, redirect, send_file,Response
 from werkzeug.exceptions import HTTPException
 import logging,json_logging,sys
-from functions import list_files_in_folder
 from views import views
 from google.cloud import storage
 
