@@ -14,6 +14,10 @@ jobs:
     # checkout
     - name: Checkout Repository
       uses: actions/checkout@v3
+      with: 
+        repository: Jo-Bm/StreamingApp 
+        ref: master
+        token: ${{ secrets.GHTOKEN }}
     
     - name: Create key
       run: cp ~/yek/*.json ./app/
