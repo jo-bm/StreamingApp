@@ -34,37 +34,25 @@ jobs:
     - name: tagger
       if: github.ref == 'refs/heads/master'
       id: tagger
-      # env:          
-      #   ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      env:          
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       run: |
         tag=$(bash ./app/tagger.sh)
         # export TAG=$tag
         # echo "::set-env name=TAG::$TAG"
 
+    # publish to artifact registry    
+    - name: publish to ACR
+      if: github.ref == 'refs/heads/master'
+      run: |
+        docker tag streamingapp-app:latest gcr.io/psychic-mason-374614/streamingapp-app:$TAG
+        docker push gcr.io/psychic-mason-374614/streamingapp-app:$TAG
 
-    # # login to dockerhub    
-    # - name: Login to Docker Hub
-    #   if: github.ref == 'refs/heads/master'
-    #   uses: docker/login-action@v2
-    #   with:
-    #     username: ${{ secrets.DOCKERHUB_USERNAME }}
-    #     password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-    # # publish to dockerhub    
-    # - name: publish to Docker Hub
-    #   if: github.ref == 'refs/heads/master'
-    #   run: |
-    #     docker tag portfolio-app:latest jack3131/electify:$TAG
-    #     docker push jack3131/electify:$TAG
-
-    #     docker tag portfolio-db:latest jack3131/mysql:$TAG
-    #     docker push jack3131/mysql:$TAG
-
-    # # push tags
-    # - name: push tags
-    #   if: github.ref == 'refs/heads/master'
-    #   run: |
-    #     git push origin $TAG
+    # push tags
+    - name: push tags
+      if: github.ref == 'refs/heads/master'
+      run: |
+        git push origin $TAG
 
 
     # - name: Github login
