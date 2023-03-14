@@ -45,6 +45,7 @@ jobs:
     - name: publish to ACR
       if: github.ref == 'refs/heads/master'
       run: |
+        echo $TAG
         docker tag streamingapp-app:latest gcr.io/psychic-mason-374614/streamingapp-app:$TAG
         docker push gcr.io/psychic-mason-374614/streamingapp-app:$TAG
 
