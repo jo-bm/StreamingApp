@@ -37,27 +37,25 @@ jobs:
     # git tag
     - name: tagger
       if: github.ref == 'refs/heads/master'
-      id: tagger
-      env:          
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      id: tag
+
       run: |
         tag=$(bash ./app/tagger.sh)
-        export TAG=$tag
-        echo "::set-env name=TAG::$TAG"
+        echo "TAG=$tag" >> $GITHUB_OUTPUT
 
     # publish to artifact registry    
     - name: publish to ACR
       if: github.ref == 'refs/heads/master'
       run: |
-        echo $TAG
-        docker tag streamingapp-app:latest gcr.io/psychic-mason-374614/streamingapp-app:$TAG
-        docker push gcr.io/psychic-mason-374614/streamingapp-app:$TAG
+        echo ${{ steps.tag.outputs.TAG }}
+        docker tag streamingapp-app:latest gcr.io/psychic-mason-374614/streamingapp-app:${{ steps.tag.outputs.TAG }}
+        docker push gcr.io/psychic-mason-374614/streamingapp-app:${{ steps.tag.outputs.TAG }}
 
     # push tags
     - name: push tags
       if: github.ref == 'refs/heads/master'
       run: |
-        git push origin $TAG
+        git push origin ${{ steps.tag.outputs.TAG }}
 
     # cleanup
     - name: cleanup
@@ -80,14 +78,14 @@ jobs:
     #   run: |
 
         
-    #     TTAG="jack3131\/mysql:$TAG"
+    #     TTAG="jack3131\/mysql:${{ steps.tag.outputs.TAG }}"
     #     sed -i "s/jack3131\/mysql:[0-9]\+\.[0-9]\+\.[0-9]\+/$TTAG/g" electify/templates/statefullset-db.yaml
-    #     TTAG="jack3131\/electify:$TAG"
+    #     TTAG="jack3131\/electify:${{ steps.tag.outputs.TAG }}"
     #     sed -i "s/jack3131\/electify:[0-9]\+\.[0-9]\+\.[0-9]\+/$TTAG/g" electify/templates/app-deploy.yaml
 
     #     git config --global user.email "you@example.com"
     #     git config --global user.name "Github Action"
-    #     git commit -am "$TAG"
+    #     git commit -am "${{ steps.tag.outputs.TAG }}"
 
     #     git push origin master
 
@@ -100,7 +98,7 @@ jobs:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
         message="<b>❌ CI for branch:</b> $GITHUB_REF_NAME failed 🚨💀
-         <b>Tag:</b> $TAG
+         <b>Tag:</b> ${{ steps.tag.outputs.TAG }}
          <b>Link:</b> <a href='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'>Link</a>
          <b>Run number:</b> $GITHUB_RUN_NUMBER"
 
@@ -114,7 +112,7 @@ jobs:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
         message="<b>✅ CI for branch:</b> $GITHUB_REF_NAME succeeded 🚀🤘
-         <b>Tag:</b> $TAG
+         <b>Tag:</b> ${{ steps.tag.outputs.TAG }}
          <b>Link:</b> <a href='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'>Link</a>
          <b>Run number:</b> $GITHUB_RUN_NUMBER"
 
